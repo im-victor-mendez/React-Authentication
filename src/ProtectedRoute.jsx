@@ -7,7 +7,7 @@ function ProtectedRoute({ children }) {
 
     if (loading) return <>Loading</>
     
-    if (!user) return <Navigate to='/login' />
+    if (!user || !localStorage.getItem('user')) return <Navigate to='/login' />
 
     return <>{children}</>
 }

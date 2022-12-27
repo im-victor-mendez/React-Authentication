@@ -34,6 +34,7 @@ export function AuthProvider({ children }) {
       const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
         console.log(currentUser)
         setUser(currentUser)
+        localStorage.setItem('user', currentUser)
         setLoading(false)
       })
 
