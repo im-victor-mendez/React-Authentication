@@ -9,6 +9,13 @@ function App() {
     <div className="App">
       <AuthProvider>
         <Routes>
+          {/*
+            <Route path='/home' element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            } />
+          */}
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
         </Routes>
