@@ -3,9 +3,10 @@ import { Navigate } from 'react-router'
 import { useAuth } from './context/authContext'
 
 function ProtectedRoute({ children }) {
-    //To add loading component
-    const { user } = useAuth()
+    const { user, loading } = useAuth()
 
+    if (loading) return <>Loading</>
+    
     if (!user) return <Navigate to='/login' />
 
     return <>{children}</>
