@@ -1,5 +1,5 @@
-import { createContext, useContext } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createContext, useContext, useEffect } from "react";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
 export const authContext = createContext()
@@ -14,10 +14,14 @@ export function useAuth() {
 
 /* Provides to all inside jsx the value property */
 export function AuthProvider({ children }) {
-    function signUp(email, password) {
-        console.log(email, password)
-        return createUserWithEmailAndPassword(auth, email, password)
+    async function signUp(email, password) {
+        return await createUserWithEmailAndPassword(auth, email, password)
     }
 
-    return <authContext.Provider value={{ signUp }}>{children}</authContext.Provider>
+    async function login(email, password) {
+        const userCredentials = await signInWithEmailAndPassword(auth, email, password)
+        return userCredentials
+    }
+
+    return <authContext.Provider value={{ signUp, login }}>{children}</authContext.Provider>
 }
